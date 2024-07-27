@@ -7,3 +7,5 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 file(GLOB SOURCE_FILES src/*.cpp src/*.hpp src/*/*.cpp src/*/*.hpp)
 
 add_executable(pdnew ${SOURCE_FILES})
+
+install(TARGETS pdnew DESTINATION bin)
