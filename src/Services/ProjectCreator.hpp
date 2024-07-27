@@ -7,8 +7,7 @@
 #include <vector>   //  std::vector
 
 #include "../DataModel/ProjectProgrammingLanguage.hpp"
-#include "../DataModel/Folder.hpp"
-#include "../DataModel/File.hpp"
+#include "FileTreeCreator.hpp"
 
 class ProjectCreator {
 public:
@@ -26,8 +25,6 @@ public:
     std::string makePdxinfoContents(std::string_view bundleId, 
                                     std::string_view projectName,
                                     std::string_view author) const;
-    std::string create(const Folder &folder, const std::filesystem::path &path) const;
-    std::string create(const File &file, const std::filesystem::path &path) const;
     std::string substitute(std::string sourceString, 
                            std::string_view tokenToReplace,
                            std::string_view replaceWith) const;
@@ -43,4 +40,7 @@ public:
     static const std::string_view mainCContents;
     static const std::string_view gitignoreContents;
     static const std::string_view mainLuaContents;
+    
+private:
+    FileTreeCreator fileTreeCreator;
 };

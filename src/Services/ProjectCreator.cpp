@@ -1,6 +1,5 @@
 #include "ProjectCreator.hpp"
 
-#include <fstream>  //  std::ofstream
 #include <algorithm>    //  std::copy
 
 ProjectCreator::ProjectCreator() = default;
@@ -39,7 +38,7 @@ std::string ProjectCreator::createProject(ProgrammingLanguage programmingLanguag
                     File{"main.c", std::string(this->mainCContents)},
                 }},
             }};
-            return this->create(projectStructure, directory);
+            return this->fileTreeCreator.create(projectStructure, directory);
         } break;
         case ProjectProgrammingLanguage::lua: {
             const Folder projectStructure{std::string(projectName), {
@@ -49,7 +48,7 @@ std::string ProjectCreator::createProject(ProgrammingLanguage programmingLanguag
                     File{"pdxinfo", this->makePdxinfoContents(bundleId, projectName, author)}
                 }},
             }};
-            return this->create(projectStructure, directory);
+            return this->fileTreeCreator.create(projectStructure, directory);
         } break;
     }
     
@@ -69,34 +68,6 @@ std::string ProjectCreator::makePdxinfoContents(std::string_view bundleId,
     auto resultWithAuthor = this->substitute(std::move(resultWithName), "{{author}}", author);
 //    auto resultWithDescription = this->substitute(std::move(resultWithAuthor), "{{description}}", description);
     return resultWithAuthor;
-}
-
-std::string ProjectCreator::create(const Folder &folder, const std::filesystem::path &path) const {
-    const auto folderPath = path / folder.name;
-    if (std::filesystem::exists(folderPath)) {
-        return "folder exists at path '" + folderPath.string() + "'";
-    }
-    std::filesystem::create_directory(folderPath);
-    for (auto &folderContent : folder.contents) {
-        auto errorText = std::visit([this, &folderPath] (const auto &value) {
-            return this->create(value, folderPath);
-        }, folderContent);
-        if (!errorText.empty()) {
-            return errorText;
-        }
-    }
-    return {};
-}
-
-std::string ProjectCreator::create(const File &file, const std::filesystem::path &path) const {
-    const auto filePath = path / file.name;
-    if (std::filesystem::exists(filePath)) {
-        return "file exists at path '" + filePath.string() + "'";
-    }
-    std::ofstream outputFile(filePath);
-    outputFile.write(file.content.data(), file.content.size());
-    outputFile.close();
-    return {};
 }
 
 std::string ProjectCreator::substitute(std::string result,
