@@ -23,6 +23,7 @@ Once the project is generated you can work with it using your favourite IDE. Pur
 
 ## Compiling `pdnew` from source
 If you like `pdnew` and want to have it compiled just clone this repo
+
 - `git clone git@github.com:fnc12/pdnew.git`.
 - `cd pdnew` - to go to cloned folder.
 - `mkdir build` - to create a folder for cmake generated project.
