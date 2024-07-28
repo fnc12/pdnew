@@ -16,11 +16,10 @@ This tool created a defeault folder structure, pdxinfo file, `CMakeLists.txt` (f
 
 ## Tips
 Once the project is generated you can work with it using your favourite IDE. Pure C project requires project generating using `cmake` utility first. To generate `cd` to your project directory after `pdnew` call, then run
-
-`mkdir build` - to create `build` folder where `cmake` is going to generate your project. This folder is added to `.gitignore` automatically by `pdnew` so don't need to worry this folder is going to corrupt your git index.
-`cd build` - to go to fresh folder.
-`cmake ..` - to generate a `make` project. This step can be modified is you want to use let's say Xcode or Visual Studio: `cmake -G Xcode ..` will generate Xcode project instead of raw `make` project. If you are intrested in this topic and want to know more - google/gpt 'cmake generators'.
-`cmake --build .` - to compile the project. Or just `make`. This command prouces `pdx` file in the project root directory. `*.pdx` is also added to `.gitignore` automatically by `pdnew`.
+- `mkdir build` - to create `build` folder where `cmake` is going to generate your project. This folder is added to `.gitignore` automatically by `pdnew` so don't need to worry this folder is going to corrupt your git index.
+- `cd build` - to go to fresh folder.
+- `cmake ..` - to generate a `make` project. This step can be modified is you want to use let's say Xcode or Visual Studio: `cmake -G Xcode ..` will generate Xcode project instead of raw `make` project. If you are intrested in this topic and want to know more - google/gpt 'cmake generators'.
+- `cmake --build .` - to compile the project. Or just `make`. This command prouces `pdx` file in the project root directory. `*.pdx` is also added to `.gitignore` automatically by `pdnew`.
 
 ## Compiling `pdnew` from source
 If you like `pdnew` and want to have it compiled just clone this repo
