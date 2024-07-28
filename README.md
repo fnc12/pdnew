@@ -6,7 +6,7 @@ Tired of creating new projects for Playdate by copying other template projects a
 
 `pdnew MyGame -l c -a "Author Name" -b com.example.myGame` to create a new pure C project.
 
-This tool created a defeault folder structure, pdxinfo file, `CMakeLists.txt` (for pure C projects not Lua), sample title images.
+This tool creates a defeault folder structure, pdxinfo file, `CMakeLists.txt` (for pure C projects not Lua), sample title images.
 
 ## Available options:
 - `-l|--language` - programming language of the project. Available values: `c` and `lua`. This option is required. `c` option creates CMake based project. `lua` option creates simple Lua project.
