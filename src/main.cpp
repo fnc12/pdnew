@@ -3,6 +3,7 @@
 
 #include "Services/ArgumentsParser.hpp"
 #include "Services/ProjectCreator.hpp"
+#include "Misc.hpp"
 
 using std::cout;
 using std::cin;
@@ -46,14 +47,17 @@ int main(int argc, const char * argv[]) {
     if (!argumentsConfiguration.projectDirectory.has_value()) {
         argumentsConfiguration.projectDirectory = std::filesystem::current_path();
     }
+    const auto projectNameWithoutSpaces = removeAllSpaces(argumentsConfiguration.projectName);
     if (!argumentsConfiguration.projectBundleId.has_value()) {
         std::string projectBundleId;
-        cout << "Input project bundle id or press Enter to leave default value com.example." + argumentsConfiguration.projectName << endl;
+        const auto defaultBundleId = "com.example." + projectNameWithoutSpaces;
+        cout << "Input project bundle id or press Enter to leave default value " << defaultBundleId << endl;
         cin >> projectBundleId;
         if (projectBundleId.empty()) {
             argumentsConfiguration.projectBundleId = std::move(projectBundleId);
+            cout << "Ok, default bundle ID '" << defaultBundleId << "' will be used." << endl;
         } else {
-            argumentsConfiguration.projectBundleId = "com.example." + argumentsConfiguration.projectName;
+            argumentsConfiguration.projectBundleId = defaultBundleId;
         }
     }
     if (!argumentsConfiguration.projectAuthor.has_value()) {
@@ -67,6 +71,7 @@ int main(int argc, const char * argv[]) {
     auto errorText = projectCreator.createProject(argumentsConfiguration.projectProgrammingLanguage.value(),
                                                   argumentsConfiguration.projectDirectory.value(),
                                                   argumentsConfiguration.projectName,
+                                                  projectNameWithoutSpaces,
                                                   argumentsConfiguration.projectBundleId.value(),
                                                   argumentsConfiguration.projectAuthor.value());
     if (!errorText.empty()) {

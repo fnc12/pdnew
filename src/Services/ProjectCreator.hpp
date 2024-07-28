@@ -18,6 +18,7 @@ public:
     std::string createProject(ProgrammingLanguage programmingLanguage, 
                               std::filesystem::path directory, 
                               std::string_view projectName,
+                              std::string_view projectNameWithoutSpaces,
                               std::string_view bundleId,
                               std::string_view author) const;
     

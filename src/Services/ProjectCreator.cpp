@@ -2,11 +2,14 @@
 
 #include <algorithm>    //  std::copy
 
+#include "../Misc.hpp"
+
 ProjectCreator::ProjectCreator() = default;
 
 std::string ProjectCreator::createProject(ProgrammingLanguage programmingLanguage, 
                                           std::filesystem::path directory,
                                           std::string_view projectName,
+                                          std::string_view projectNameWithoutSpaces,
                                           std::string_view bundleId,
                                           std::string_view author) const
 {
@@ -18,7 +21,7 @@ std::string ProjectCreator::createProject(ProgrammingLanguage programmingLanguag
         case ProjectProgrammingLanguage::c: {
             const Folder projectStructure{std::string(projectName), {
                 File{".gitignore", std::string(this->gitignoreContents)},
-                File{"CMakeLists.txt", this->makeCmakeListsContents(projectName)},
+                File{"CMakeLists.txt", this->makeCmakeListsContents(projectNameWithoutSpaces)},
                 Folder{"Source", {
                     Folder{"images", {}},
                     Folder{"music", {}},
