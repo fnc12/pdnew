@@ -2,7 +2,7 @@
   <img src="https://github.com/fnc12/pdnew/blob/main/лого.png" alt="Kurwa image" width="250"/>
 </p>
 
-# pdnew - CLI tool for creating new project for Playdate
+# pdnew - CLI tool for creating new projects for Playdate
 
 Tired of creating new projects for Playdate by copying other template projects and modifying them? `pdnew` is what you need. Just type
 
