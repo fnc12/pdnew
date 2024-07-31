@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/fnc12/pdnew/blob/main/лого.png" alt="Kurwa image" width="557"/>
+  <img src="https://github.com/fnc12/pdnew/blob/main/лого.png" alt="Kurwa image" width="250"/>
 </p>
 
 # pdnew - CLI tool for creating new project for Playdate
