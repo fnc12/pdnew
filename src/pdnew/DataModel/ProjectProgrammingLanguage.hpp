@@ -9,7 +9,10 @@ enum class ProjectProgrammingLanguage {
     lua,
 };
 
-extern std::array<ProjectProgrammingLanguage, 2> AllProjectProgrammingLanguages;
+constexpr std::array<ProjectProgrammingLanguage, 2> AllProjectProgrammingLanguages{
+    ProjectProgrammingLanguage::c,
+    ProjectProgrammingLanguage::lua,
+};
 
 std::string_view ProjectProgrammingLanguageToString(ProjectProgrammingLanguage projectProgrammingLanguage);
 std::optional<ProjectProgrammingLanguage> ProjectProgrammingLanguageFromString(std::string_view stringView);

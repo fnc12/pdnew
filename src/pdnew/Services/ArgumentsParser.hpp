@@ -2,7 +2,7 @@
 
 #include <variant>  //  std::variant
 
-#include "../DataModel/ArgumentsConfiguration.hpp"
+#include "DataModel/ArgumentsConfiguration.hpp"
 
 class ArgumentsParser {
 public:

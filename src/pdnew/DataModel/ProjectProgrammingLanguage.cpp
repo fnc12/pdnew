@@ -1,10 +1,5 @@
 #include "ProjectProgrammingLanguage.hpp"
 
-std::array<ProjectProgrammingLanguage, 2> AllProjectProgrammingLanguages {
-    ProjectProgrammingLanguage::c,
-    ProjectProgrammingLanguage::lua,
-};
-
 std::string_view ProjectProgrammingLanguageToString(ProjectProgrammingLanguage projectProgrammingLanguage) {
     switch (projectProgrammingLanguage) {
         case ProjectProgrammingLanguage::c:
