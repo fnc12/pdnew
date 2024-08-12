@@ -1,6 +1,5 @@
 #include <catch2/catch_all.hpp>
-
-#include "DataModel/ProjectProgrammingLanguage.hpp"
+#include <DataModel/ProjectProgrammingLanguage.hpp>
 
 TEST_CASE("ProjectProgrammingLanguage", "[AllProjectProgrammingLanguages]") {
     STATIC_REQUIRE(AllProjectProgrammingLanguages.size() == 2);

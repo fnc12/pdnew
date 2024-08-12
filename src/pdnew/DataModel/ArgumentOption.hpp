@@ -13,7 +13,12 @@ enum class ArgumentOption {
     author,
 };
 
-extern const std::array<ArgumentOption, 4> AllArgumentOptions;
+constexpr std::array<ArgumentOption, 4> AllArgumentOptions{
+    ArgumentOption::language,
+    ArgumentOption::directory,
+    ArgumentOption::bundleId,
+    ArgumentOption::author,
+};
 
 ArgumentOptionStringRepresentation ArgumentOptionStringRepresentationFor(ArgumentOption argumentOption);
 std::optional<ArgumentOption> ArgumentOptionForString(std::string_view stringView);

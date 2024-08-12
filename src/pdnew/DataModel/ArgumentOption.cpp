@@ -1,12 +1,5 @@
 #include "ArgumentOption.hpp"
 
-const std::array<ArgumentOption, 4> AllArgumentOptions {
-    ArgumentOption::language,
-    ArgumentOption::directory,
-    ArgumentOption::bundleId,
-    ArgumentOption::author,
-};
-
 ArgumentOptionStringRepresentation ArgumentOptionStringRepresentationFor(ArgumentOption argumentOption) {
     switch (argumentOption) {
         case ArgumentOption::language:
