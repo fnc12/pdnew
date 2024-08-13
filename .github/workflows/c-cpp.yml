@@ -11,3 +11,6 @@ jobs:
 
       - name: Configure and Build Project
         uses: threeal/cmake-action@main
+        with:
+          build-dir: build
+          cmake-options: "-DCMAKE_CXX_STANDARD=17"
