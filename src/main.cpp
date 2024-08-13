@@ -34,8 +34,9 @@ int main(int argc, const char * argv[]) {
     
     ArgumentsParser argumentsParser;
     auto parseResult = argumentsParser.parse(argc, argv);
-    if (std::holds_alternative<std::string>(parseResult)) {
-        const auto errorText = std::get<std::string>(parseResult);
+    if (std::holds_alternative<ArgumentsParserError>(parseResult)) {
+        const auto &error = std::get<ArgumentsParserError>(parseResult);
+        const auto errorText = error.what();
         cerr << errorText << endl;
         printUsage();
         return 1;

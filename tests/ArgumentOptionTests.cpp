@@ -1,7 +1,7 @@
 #include <catch2/catch_all.hpp>
 #include <DataModel/ArgumentOption.hpp>
 
-#include "ArgumentOptionStringRepresentation+operator==.hpp"
+#include "extensions/ArgumentOptionStringRepresentation+operator==.hpp"
 
 TEST_CASE("ArgumentOption", "[AllArgumentOptions]") {
     STATIC_REQUIRE(AllArgumentOptions.size() == 4);

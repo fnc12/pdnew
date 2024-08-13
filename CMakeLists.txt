@@ -30,7 +30,7 @@ file(GLOB LIB_SOURCE_FILES src/pdnew/*.cpp src/pdnew/*.hpp src/pdnew/*/*.cpp src
 add_library(pdnew_lib STATIC ${LIB_SOURCE_FILES})
 target_include_directories(pdnew_lib PUBLIC src/pdnew/)
 
-file(GLOB TEST_FILES tests/*.cpp tests/*.hpp)
+file(GLOB TEST_FILES tests/*.cpp tests/*.hpp tests/*/*.cpp tests/*/*.hpp)
 
 add_executable(pdnew src/main.cpp)
 target_link_libraries(pdnew PRIVATE pdnew_lib)
