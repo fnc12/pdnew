@@ -12,28 +12,17 @@ using std::endl;
 
 void printUsage();
 
-#include <fstream>
-
 int main(int argc, const char * argv[]) {
-    /*{
-        std::ifstream file("/Users/yevgeniyzakharov/Desktop/playdate/qumalak/Source/titles/card-pressed.png");
-        cout << std::hex;
-        int counter = 0;
-        while (!file.eof()) {
-            unsigned char c;
-            file.read((char*)&c, 1);
-            cout << "0x" << unsigned(c) << ", ";
-            ++counter;
-            if (counter % 16 == 0) {
-                cout << endl;
-            }
-        }
-        cout << endl;
-        return 2;
-    }*/
-    
     ArgumentsParser argumentsParser;
-    auto parseResult = argumentsParser.parse(argc, argv);
+    const auto arguments = [argc, argv] {
+        std::vector<std::string_view> arguments;
+        arguments.reserve(argc);
+        for (auto i = 0; i < argc; ++i) {
+            arguments.push_back(std::string_view(argv[i]));
+        }
+        return arguments;
+    }();
+    auto parseResult = argumentsParser.parse(arguments);
     if (std::holds_alternative<ArgumentsParserError>(parseResult)) {
         const auto &error = std::get<ArgumentsParserError>(parseResult);
         const auto errorText = error.what();

@@ -7,9 +7,7 @@
 #include "ProjectProgrammingLanguage.hpp"
 
 class ArgumentsConfiguration {
-public:
-    ArgumentsConfiguration(std::string projectName);
-    
+public:    
     std::string projectName;
     std::optional<ProjectProgrammingLanguage> projectProgrammingLanguage;
     std::optional<std::filesystem::path> projectDirectory;

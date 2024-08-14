@@ -6,18 +6,19 @@
 
 ArgumentsParser::ArgumentsParser() = default;
 
-std::variant<ArgumentsConfiguration, ArgumentsParserError> ArgumentsParser::parse(int argc, const char * argv[]) const {
+std::variant<ArgumentsConfiguration, ArgumentsParserError> ArgumentsParser::parse(const std::vector<std::string_view> &arguments) const {
+    const auto argc = int(arguments.size());
     if (argc < 2) {
-        return ArgumentsParserError::makeMissingProjectName(argv[0]);
+        return ArgumentsParserError::makeMissingProjectName(std::string(arguments.at(0)));
     }
     int argumentsParsedCount = 2;
-    ArgumentsConfiguration argumentsConfiguration{std::string(argv[1])};
+    ArgumentsConfiguration argumentsConfiguration{std::string(arguments.at(1))};
     std::vector<ArgumentOption> unusedArgumentOptions(AllArgumentOptions.begin(), AllArgumentOptions.end());
     while (argc > argumentsParsedCount) {
         if (unusedArgumentOptions.empty()) {
-            return ArgumentsParserError::makeExtraTokensFoundStarting(argv[argumentsParsedCount]);
+            return ArgumentsParserError::makeExtraTokensFoundStarting(std::string(arguments.at(argumentsParsedCount)));
         }
-        const std::string_view key = argv[argumentsParsedCount];
+        const auto key = arguments.at(argumentsParsedCount);
         auto argumentOptionMaybe = ArgumentOptionForString(key);
         if (!argumentOptionMaybe.has_value()) {
             return ArgumentsParserError::makeIncorrectKey(std::string(key));
@@ -35,7 +36,7 @@ std::variant<ArgumentsConfiguration, ArgumentsParserError> ArgumentsParser::pars
         if (argc <= argumentsParsedCount) {
             return ArgumentsParserError::makeValueExpectedAfterKey(std::string(key));
         }
-        const std::string_view value = argv[argumentsParsedCount];
+        const auto value = arguments.at(argumentsParsedCount);
         switch (argumentOption) {
             case ArgumentOption::language: {
                 const auto programmingLanguageMaybe = ProjectProgrammingLanguageFromString(value);
