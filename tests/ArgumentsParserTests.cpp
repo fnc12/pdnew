@@ -2,19 +2,24 @@
 #include <Services/ArgumentsParser.hpp>
 #include <algorithm>    //  std::transform
 
-#include "extensions/ArgumentsParserError+Operator==.hpp"
-#include "extensions/ArgumentsConfiguration+operator==.hpp"
-
 TEST_CASE("ArgumentsParser", "[parse]") {
     struct TestCase {
         std::vector<std::string> arguments;
-        std::variant<ArgumentsConfiguration, ArgumentsParserError> expected;
+        ArgumentsParseResult expected;
     };
     const std::vector<TestCase> testCases = {
+        
+        //  success test cases
         {{"pdnew", "MyGame", "-l", "c", "-a", "fnc12"}, ArgumentsConfiguration{
             "MyGame", ProjectProgrammingLanguage::c, std::nullopt, std::nullopt, "fnc12",
         }},
+        {{"pdnew", "MyGame", "--language", "c", "--author", "fnc12"}, ArgumentsConfiguration{
+            "MyGame", ProjectProgrammingLanguage::c, std::nullopt, std::nullopt, "fnc12",
+        }},
         {{"pdnew", "SuperBorat", "-l", "lua", "-a", "Somebody", "-d", "projects"}, ArgumentsConfiguration{
+            "SuperBorat", ProjectProgrammingLanguage::lua, std::filesystem::path("projects"), std::nullopt, "Somebody",
+        }},
+        {{"pdnew", "SuperBorat", "--language", "lua", "--author", "Somebody", "--directory", "projects"}, ArgumentsConfiguration{
             "SuperBorat", ProjectProgrammingLanguage::lua, std::filesystem::path("projects"), std::nullopt, "Somebody",
         }},
         {{"pdnew", "JumpingGoat", "-l", "c", "-a", "Dua Lipa", "-d", "my_fancy_projects", "-b", "com.dualipa.jumpinggoat"},
@@ -28,6 +33,19 @@ TEST_CASE("ArgumentsParser", "[parse]") {
         {{"pdnew", "RDR25"}, ArgumentsConfiguration{
             "RDR25", std::nullopt, std::nullopt, std::nullopt, std::nullopt,
         }},
+        
+        //  failure test cases
+        {{"pdnew"}, ArgumentsParserError::makeMissingProjectName("pdnew")},
+        {{"pdnew", "my_game", "-z"}, ArgumentsParserError::makeIncorrectKey("-z")},
+        {{"pdnew", "MyGame", "-z", "c"}, ArgumentsParserError::makeIncorrectKey("-z")},
+        {{"pdnew", "MyGame", "-l"}, ArgumentsParserError::makeValueExpectedAfterKey("-l")},
+        {{"pdnew", "MyGame", "--language"}, ArgumentsParserError::makeValueExpectedAfterKey("--language")},
+        {{"pdnew", "MyGame", "-b"}, ArgumentsParserError::makeValueExpectedAfterKey("-b")},
+        {{"pdnew", "MyGame", "--bundleId"}, ArgumentsParserError::makeValueExpectedAfterKey("--bundleId")},
+        {{"pdnew", "MyGame", "-d"}, ArgumentsParserError::makeValueExpectedAfterKey("-d")},
+        {{"pdnew", "MyGame", "--directory"}, ArgumentsParserError::makeValueExpectedAfterKey("--directory")},
+        {{"pdnew", "MyGame", "-a"}, ArgumentsParserError::makeValueExpectedAfterKey("-a")},
+        {{"pdnew", "MyGame", "--author"}, ArgumentsParserError::makeValueExpectedAfterKey("--author")},
     };
     for (auto &testCase : testCases) {
         ArgumentsParser argumentsParser;

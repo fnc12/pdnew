@@ -14,3 +14,5 @@ public:
     std::optional<std::string> projectBundleId;
     std::optional<std::string> projectAuthor;
 };
+
+bool operator==(const ArgumentsConfiguration& lhs, const ArgumentsConfiguration& rhs);

@@ -6,7 +6,7 @@
 
 ArgumentsParser::ArgumentsParser() = default;
 
-std::variant<ArgumentsConfiguration, ArgumentsParserError> ArgumentsParser::parse(const std::vector<std::string_view> &arguments) const {
+ArgumentsParseResult ArgumentsParser::parse(const std::vector<std::string_view> &arguments) const {
     const auto argc = int(arguments.size());
     if (argc < 2) {
         return ArgumentsParserError::makeMissingProjectName(std::string(arguments.at(0)));
