@@ -4,7 +4,9 @@
 
 #include "../Misc.hpp"
 
-ProjectCreator::ProjectCreator() = default;
+ProjectCreator::ProjectCreator(const FileTreeCreator &fileTreeCreator):
+fileTreeCreator(fileTreeCreator)
+{}
 
 std::string ProjectCreator::createProject(ProgrammingLanguage programmingLanguage, 
                                           std::filesystem::path directory,

@@ -6,14 +6,14 @@
 #include <string_view>  //  std::string_view
 #include <vector>   //  std::vector
 
-#include "../DataModel/ProjectProgrammingLanguage.hpp"
+#include "DataModel/ProjectProgrammingLanguage.hpp"
 #include "FileTreeCreator.hpp"
 
 class ProjectCreator {
 public:
     using ProgrammingLanguage = ProjectProgrammingLanguage;
     
-    ProjectCreator();
+    ProjectCreator(const FileTreeCreator &fileTreeCreator);
     
     std::string createProject(ProgrammingLanguage programmingLanguage, 
                               std::filesystem::path directory, 
@@ -43,5 +43,5 @@ public:
     static const std::string_view mainLuaContents;
     
 private:
-    FileTreeCreator fileTreeCreator;
+    const FileTreeCreator &fileTreeCreator;
 };

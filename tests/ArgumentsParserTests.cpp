@@ -46,6 +46,9 @@ TEST_CASE("ArgumentsParser", "[parse]") {
         {{"pdnew", "MyGame", "--directory"}, ArgumentsParserError::makeValueExpectedAfterKey("--directory")},
         {{"pdnew", "MyGame", "-a"}, ArgumentsParserError::makeValueExpectedAfterKey("-a")},
         {{"pdnew", "MyGame", "--author"}, ArgumentsParserError::makeValueExpectedAfterKey("--author")},
+        {{"pdnew", "MyGame", "-l", "c", "-a", "PDiddy", "-b", "com.example.mygame", "-d", "projects", "something"}, ArgumentsParserError::makeExtraTokensFoundStarting("something")},
+        {{"pdnew", "MyGame", "-l", "c", "-l"}, ArgumentsParserError::makeKeyIsSpecifiedMoreThanOnce("-l")},
+        {{"pdnew", "MyGame", "-l", "swift"}, ArgumentsParserError::makeIncorrectLanguageString("swift")},
     };
     for (auto &testCase : testCases) {
         ArgumentsParser argumentsParser;

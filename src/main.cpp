@@ -4,7 +4,7 @@
 
 int main(int argc, const char * argv[]) {
     
-    //  covert arguments to vector of string views
+    //  convert arguments to vector of string views
     const auto arguments = [argc, argv] {
         std::vector<std::string_view> arguments;
         arguments.reserve(argc);
@@ -15,7 +15,8 @@ int main(int argc, const char * argv[]) {
     }();
     
     UsagePrinter usagePrinter;
-    ProjectCreator projectCreator;
+    FileTreeCreator fileTreeCreator;
+    ProjectCreator projectCreator(fileTreeCreator);
     PdNewApp pdNewApp(usagePrinter, projectCreator);
     return pdNewApp.work(arguments);
 }
