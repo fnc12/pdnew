@@ -2,6 +2,7 @@
 
 #include <string>   //  std::string
 #include <ostream>  //  std::ostream
+#include <variant>
 
 #include "DataModel/ArgumentOption.hpp"
 

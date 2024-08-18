@@ -86,7 +86,7 @@ std::ostream& operator<<(std::ostream &os, const ArgumentsParserError::MissingPr
 }
 
 std::ostream& operator<<(std::ostream &os, const ArgumentsParserError::ExtraTokensFoundStarting &extraTokensFoundStarting) {
-    return os << "ExtraTokensFoundStarting(" << extraTokensFoundStarting << ")";
+    return os << "ExtraTokensFoundStarting(" << extraTokensFoundStarting.with << ")";
 }
 
 std::ostream& operator<<(std::ostream &os, const ArgumentsParserError::IncorrectKey &incorrectKey) {
